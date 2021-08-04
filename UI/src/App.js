@@ -93,7 +93,6 @@ function App() {
           }}>
           </Route>
           <Route exact path="/about">
-            <div>India and america are very different</div>
             <About />
           </Route>
         </Switch>

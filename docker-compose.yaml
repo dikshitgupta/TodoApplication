@@ -18,7 +18,23 @@ services:
     expose:
       - 8080
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./todolist springboot/Dockerfile
     depends_on:
+      - docker-mysql
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./UI/
+      dockerfile: Dockerfile
+    volumes:
+      - './UI/.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - todolist-backend
       - docker-mysql
