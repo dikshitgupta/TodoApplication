@@ -3,7 +3,6 @@ package com.dikshit.todolist.service;
 import com.dikshit.todolist.model.TodoItem;
 import com.dikshit.todolist.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;

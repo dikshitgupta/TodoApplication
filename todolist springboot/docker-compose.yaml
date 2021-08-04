@@ -1,0 +1,24 @@
+version: '3'
+services:
+  docker-mysql:
+    container_name: docker-mysql
+    image: 'mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=todolistdb
+    ports:
+      - 3306:3306
+
+  todolist-backend:
+    image: todolist-backend
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    expose:
+      - 8080
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - docker-mysql
