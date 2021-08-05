@@ -26,7 +26,9 @@ export const AddTodo = (props) => {
                             <label for="desc">Todo Description</label>
                             <input type="text" value={desc} onChange={(e) => { setDesc(e.target.value) }} class="form-control" id="desc" placeholder="Enter Description"/>
                     </div>
-                        <button type="submit" class="btn btn-success">Submit Todo</button>
+                        <div class="Submitclass">
+                            <button type="submit" class="btn btn-success">Submit Todo</button>
+                        </div>
             </form>
         </div>
             )
