@@ -1,12 +1,25 @@
-import React from 'react'
+import {useEffect,React,useState} from 'react'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
+import AuthenticationService from './Authentication'
 
 export default function Header(props) {
-    return (
+  
+  const [isLoggedIn, SetIsLoggedIn] = useState(false);
+
+  const logout = () => {
+    {AuthenticationService.logout()}
+    SetIsLoggedIn(AuthenticationService.isUserLoggedIn())
+  }
+
+  useEffect(() => {
+    SetIsLoggedIn(AuthenticationService.isUserLoggedIn())
+  })
+
+  return (
+        <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          {/* <Link className="navbar-brand" to="/">{props.title}</Link> */}
           <Link className="navbar-brand" to="/">{props.title}</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -14,21 +27,21 @@ export default function Header(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                {/* <Link className="nav-link active" aria-current="page" to="/">Home</Link> */}
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
-                {/* <Link className="nav-link" to="/about">About</Link> */}
               </li>  
             </ul>
-            { props.searchBar? <form className="d-flex">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>: ""}
+            
+            <ul className="navbar-nav navbar-collapse justify-content-end">
+                        {!isLoggedIn && <li><Link className="nav-link" to="/">Login</Link></li>}
+                        {isLoggedIn && <li><Link className="nav-link" to="/logout" onClick={logout}>Logout</Link></li>}
+            </ul>
           </div>
         </div>
       </nav>
+      </>
     )
 }
 
@@ -42,3 +55,6 @@ Header.propTypes = {
     title: PropTypes.string,
     searchBar: PropTypes.bool.isRequired
 }
+
+
+

@@ -12,7 +12,7 @@ export const TodoItem = ({ todo, onDelete }) => {
     const [isModify, setIsModify] = useState(false);
 
     useEffect(() => {
-        console.log("Inside useEffect of todoitem")
+        console.log("Inside useEffect of todoitem",todoItem)
         if (isModify) {
             console.log("todoItem :::", todoItem)
             fetch(`http://localhost:8080/api/todoItems/${todoItem.id}`, {
@@ -53,4 +53,3 @@ export const TodoItem = ({ todo, onDelete }) => {
 // if we do like this onDelete(todo)
 // then function will be called during reneding.
 // so we do this.
-
